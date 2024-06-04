@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+ifstream fin("gengraf.in");
+ofstream gout("gengraf.out");
+int a[11][11],x[101],n,p,k,m;
+void afis()
+{
+    k=1;
+    for(int i=1;i<=n;i++)
+        for(int j=i+1;j<=n;j++)
+    {
+        a[i][j]=x[k];
+        a[j][i]=x[k];
+        ++k;
+    }
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+            gout<<a[i][j]<<' ';
+        gout<<endl;
+    }
+    gout<<endl;
+}
+void bkt(int p,int x[],int k)
+{
+    for(int i=0;i<=1;i++)
+    {
+        x[k]=i;
+        if(k==m)
+            afis();
+        else
+            bkt(p,x,k+1);
+    }
+}
+int main()
+{
+    fin>>n;
+    m=n*(n-1)/2;
+    p=pow(2,m);
+    gout<<p<<endl;
+    bkt(p,x,1);
+}
